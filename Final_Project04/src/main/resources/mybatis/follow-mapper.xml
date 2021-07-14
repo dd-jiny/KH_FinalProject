@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="followmapper">
+	
+	<!-- 특정 아이디 구독(팔로우) -->
+	<insert id="insertFollow" parameterType="followDto">
+		INSERT INTO followTable
+		VALUES (followSeq.NEXTVAL, #{following_ID}, #{follower_ID})
+	</insert>
+	<!-- 특정아이디 팔로우수 -->
+	<select id="followCount" resultType="int">
+		SELECT COUNT(*)
+		FROM followTable
+		WHERE follower_ID = #{follower_ID}
+	</select>
+	
+	<!-- 특정 아이디를 팔로우 한 사용자 조회 -->
+	<select id="followList" resultType="followDto">
+		SELECT *
+		FROM followTable
+		WHERE follower_ID =#{follower_ID}
+	</select>
+	
+	<!-- 로그인한 아이디가 팔로우한 사용자인지 알기위해-->
+	<select id="checkFollow" parameterType="HashMap" resultType="int">
+		SELECT COUNT(*) 
+		FROM sub 
+		WHERE following_ID = #{following_ID} 
+		AND follower_ID = #{follower_ID}
+	</select>
+	
+	<!-- 팔로우 취소 -->
+	<delete id="followDelete" parameterType="HashMap">
+		SELECT *
+		FROM followTable
+		WHERE following_ID = #{following_ID}  AND follower_ID = #{follower_ID}
+	</delete>
+	
+	<!-- 내가 팔로우한 사용자를 조회 -->
+	<select id="myFollow" parameterType="String">
+		SELECT *
+		FROM followTable
+		WHERE following_ID = #{folloing_ID}
+	</select>
+	
+</mapper>

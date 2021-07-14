@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="ChatRoom">
+
+	<insert id="createChatRoom" parameterType="String">
+		INSERT INTO CHATROOM VALUES(CHATROOM_ID.NEXTVAL, #{chatroom_buyer}, SYSDATE, #{chatroom_title}, #{chatroom_seller})
+	</insert>
+	
+	
+	<select id="selectOne" parameterType="chatroomDto" resultType="chatroomDto">
+		SELECT * FROM CHATROOM WHERE CHATROOM_SELLER = #{chatroom_seller} AND CHATROOM_BUYER = #{chatroom_buyer} AND CHATROOM_TITLE = #{chatroom_title}
+	</select>
+	
+
+
+</mapper>

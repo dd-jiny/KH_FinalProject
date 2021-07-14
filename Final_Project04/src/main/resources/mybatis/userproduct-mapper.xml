@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="userproduct">
+
+	<select id="userProductList" resultType="productDto">
+		SELECT *
+		FROM Product
+		WHERE userRole = 'USER'
+		ORDER BY productRegDate DESC
+	</select>
+	
+	<select id="userProductOne" resultType="productDto">
+		SELECT *
+		FROM Product
+		WHERE productSeq = #{productSeq}
+	</select>
+	
+	<insert id="userProductInsert" parameterType="productDto">
+		INSERT INTO Product
+		VALUES (productSeq.NEXTVAL, #{productName}, #{productPrice}, #{sellerAddress}, SYSDATE, #{productInfo}, #{productImg}, #{productThumb}, 'Y', 'USER', #{userSeq}, #{userId}, #{userLatitude}, #{userLongitude})
+	</insert>
+	
+	
+	<!-- 지역으로 물품 검색 -->
+	<select id="selectByaddr" parameterType="String" resultType="productDto">
+	<![CDATA[
+		SELECT * FROM Product WHERE sellerAddress LIKE '%'||#{sellerAddress}||'%' ORDER BY productRegDate DESC
+	]]>
+	</select>
+	
+	<!-- 상품명으로 검색 -->
+	<select id="selectByproName" parameterType="String" resultType="productDto">
+	<![CDATA[
+		SELECT * FROM Product WHERE productName LIKE '%'||#{productName}||'%' ORDER BY productRegDate DESC
+	]]>
+	</select>
+	
+	<!-- 회원 위도 경도 / 상품명 / 주소 리스트로 뽑아오기 -->
+	<select id="selectlistLatLong" resultType="productDto">
+	 	SELECT productName, userLatitude, userLongitude FROM Product WHERE userRole = 'USER' AND userLatitude IS NOT NULL AND userLongitude IS NOT NULL
+	</select>
+	
+	<!-- 상품명으로 selectOne -->
+	<select id="selectOneByName" resultType="productDto">
+		
+		SELECT * FROM Product WHERE productName = #{productName}
+	
+	</select>
+</mapper>

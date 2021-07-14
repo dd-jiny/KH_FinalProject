@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="adminProduct">
+
+
+	<select id="adminProductList" resultType="productDto">
+		SELECT *
+		FROM Product
+		WHERE userRole = 'ADMIN'
+		ORDER BY productPrice DESC
+	</select>
+
+	<!--  메소드에 태워서 보내주는 파라미터, where절에 파라미터있으면 parameterType 같은 타입으로 적어줘야 함-->
+	<select id="adminProductOne" resultType="productDto" parameterType="int">
+		SELECT *
+		FROM Product
+		WHERE productSeq = #{productSeq}
+	</select>
+	
+	<insert id="adminProductInsert" parameterType="productDto">
+		INSERT INTO Product
+		VALUES (productSeq.NEXTVAL, #{productName}, #{productPrice}, NULL, SYSDATE, #{productInfo}, #{productImg}, #{productThumb}, 'Y', 'ADMIN', #{userSeq}, #{userId},  NULL,  NULL)
+	</insert>
+	
+</mapper>
+
+	

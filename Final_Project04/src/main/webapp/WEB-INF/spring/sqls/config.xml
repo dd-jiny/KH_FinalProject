@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD Config 3.0//EN" "http://mybatis.org/dtd/mybatis-3-config.dtd" >
+<configuration>
+
+	<typeAliases>
+		<typeAlias type="com.phoenix.carrot.dto.sns.WeekendFarmDto" alias="weekendFarmDto"/>
+		<typeAlias type="com.phoenix.carrot.dto.sns.EntireBoardDto" alias="entireBoardDto"/>
+		<typeAlias type="com.phoenix.carrot.user.dto.UserDto" alias="userDto"/>
+		<typeAlias type="com.phoenix.carrot.product.dto.ProductDto" alias="productDto"/>
+		<typeAlias type="com.phoenix.carrot.dto.sns.CommentBoardDto" alias="commentBoardDto"/>
+		<typeAlias type="com.phoenix.carrot.dto.sns.LikeTableDto" alias="likeTableDto"/>
+		<typeAlias type="com.phoenix.carrot.chat.dto.ChatRoomDto" alias="chatroomDto"/>
+		<typeAlias type="com.phoenix.carrot.chat.dto.MessageDto" alias="messageDto"/>
+		<typeAlias type="com.phoenix.carrot.dto.sns.FollowDto" alias="followDto"/>
+		<typeAlias type="com.phoenix.carrot.order.dto.OrderDto" alias="orderDto"/>
+	</typeAliases>
+	
+	<mappers>
+		<mapper resource="/mybatis/snsboard-mapper.xml"/>
+		<mapper resource="/mybatis/user-mapper.xml"/>
+		<mapper resource="/mybatis/admproduct-mapper.xml"/>
+		<mapper resource="/mybatis/userproduct-mapper.xml"/>
+		<mapper resource="/mybatis/commentboard-mapper.xml"/>
+		<mapper resource="/mybatis/notice-mapper.xml"/>
+		<mapper resource="/mybatis/liketable-mapper.xml"/>
+		<mapper resource="/mybatis/chatroom-mapper.xml"/>
+		<mapper resource="/mybatis/message-mapper.xml"/>
+		<mapper resource="/mybatis/follow-mapper.xml"/>
+		<mapper resource="/mybatis/order-mapper.xml"/>
+	</mappers>
+</configuration>

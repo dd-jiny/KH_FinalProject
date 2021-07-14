@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="commentboard">
+
+
+	<!-- 댓글리스트 가져오기 -->
+	<select id="board_replyList" parameterType="HashMap" resultType="commentBoardDto">
+		SELECT *
+		FROM commentBoard
+		WHERE entireBoardSeq = #{entireBoardSeq} 
+		ORDER BY commentNoSeq ASC
+	</select>
+	
+	<!-- 댓글쓰기 -->
+	<insert id="insertBoardReply" parameterType="HashMap">
+		INSERT INTO commentBoard 
+		VALUES (commentNoSeq.NEXTVAL, #{groupNo}, #{groupDepth}, #{entireBoardSeq}, #{userSeq}, #{userId}, #{replyContent}, SYSDATE)
+	</insert>
+	
+	<!-- 댓글삭제 -->
+	<delete id="deleteBoardReply" parameterType="HashMap">
+		DELETE FROM commentBoard
+		WHERE commentNoSeq = #{commentNoSeq} AND userId = #{userId}
+	</delete>
+	
+	<!-- 댓글 전체 삭제 -->
+	<delete id="deleteBoardReplyAll" parameterType="HashMap">
+		DELETE 
+		FROM commentBoardTable
+		WHERE commentNoSeq IN (
+		SELECT commentNoSeq
+		FROM commentBoardTable
+		WHERE commentNoSeq = #{commentNoSeq} AND userId = #{userId}
+		) OR groupNo IN (
+		SELECT commentNoSeq
+		FROM commentBoardTable
+		WHERE commentNoSeq = #{commentNoSeq} AND userId = #{userId}
+		)
+	</delete>
+	
+	<update id="updateReply" parameterType="HashMap">
+		UPDATE commentBoardTable
+		SET replyContent = #{replyContent}, replyRegDate = SYSDATE
+		WHERE commentBoardTable
+	</update>
+</mapper>

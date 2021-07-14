@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="snsboard">
+
+  	<resultMap type="entireBoardDto" id="entireBoardMap">
+  		<result property="entireBoardSeq" column="entireBoardSeq"/>
+  		<result property="boardKind" column="boardKind"/>
+  		<result property="boardDate" column="boardDate"/>
+  		<result property="boardTitle" column="boardTitle"/>
+  		<result property="boardContents" column="boardContents"/>
+  		<result property="userId" column="userId"/>
+  		<result property="userSeq" column="userSeq"/>
+  		<result property="boardImg" column="boardImg"/>
+  		<result property="boardThumbImg" column="boardThumbImg"/>
+  		<result property="likeCount" column="likeCount"/>
+  	</resultMap>
+
+	<select id="snsBoardList" resultType="entireBoardDto">
+		SELECT *
+		FROM entireBoard
+		WHERE boardKind = 1
+		ORDER BY boardDate DESC
+	</select>
+	
+	<insert id="snsBoardInsert" parameterType="entireBoardDto">
+		INSERT INTO entireBoard
+		VALUES(entireBoardSeq.NEXTVAL, 1, SYSDATE, 'sns글테스트입니다.', #{boardContents}, #{userId}, #{userSeq}, #{boardImg}, #{boardThumbImg}, 0)
+	</insert>
+	
+	<select id="snsBoardOne" resultMap="entireBoardMap">
+		SELECT *
+		FROM entireBoard
+		WHERE entireBoardSeq = #{entireBoardSeq}
+	</select>
+	
+	<update id="snsBoardUpdate" parameterType="entireBoardDto">
+		UPDATE entireBoard
+		SET boardContents = #{boardContents}
+		WHERE entireBoardSeq = #{entireBoardSeq}
+	</update>
+	
+	<delete id="snsBoardDelete" parameterType="int">
+		DELETE FROM entireBoard
+		WHERE entireBoardSeq = #{entireBoardSeq}
+	</delete>
+	
+	<!-- 유저개인피드보기 -->
+	<select id="snsUserFeedList" parameterType="String" resultType="entireBoardDto">
+		SELECT *
+		FROM entireBoard
+		WHERE boardKind = 1 
+		AND userId = #{userId}
+		ORDER BY boardDate DESC
+	</select>
+	
+	<!-- 유저검색을 위한 리스트 출력 -->
+	<select id="userList" resultType="userDto">
+		SELECT *
+		FROM USERS
+		ORDER BY USERSEQ
+	</select>
+	
+	<!-- sns유저검색 아이디로검색 -->
+	<select id="snsSearchUserById" parameterType="String" resultType="userDto">
+	<![CDATA[
+		SELECT * FROM USERS WHERE USERID LIKE '%'||#{USERID}||'%' ORDER BY USERID DESC
+	]]>
+	</select>
+	
+	<!-- sns유저 검색 이름으로 검색 -->
+	<select id="snsSearchUserByName" parameterType="String" resultType="userDto">
+	<![CDATA[
+		SELECT * FROM USERS WHERE USERNAME LIKE '%'||#{USERNAME}||'%' ORDER BY USERID DESC
+	]]>
+	</select>
+
+</mapper>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
