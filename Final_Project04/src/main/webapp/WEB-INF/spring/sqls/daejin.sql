@@ -3,7 +3,7 @@ DROP TABLE weekendFarm;
 
 CREATE SEQUENCE farmSeq;
 
---위도 경도 추가해야할듯
+--���� �浵 �߰��ؾ��ҵ�
 CREATE TABLE weekendFarm(
 	farmSeq NUMBER PRIMARY KEY NOT NULL,
 	farmName VARCHAR2(100) NOT NULL,
@@ -13,7 +13,7 @@ CREATE TABLE weekendFarm(
 );
 
 INSERT INTO weekendFarm
-VALUES (farmSeq.NEXTVAL, '대진이네 농장', '경기도 고양시', '01097954578');
+VALUES (farmSeq.NEXTVAL, '�����̳� ����', '��⵵ �����', '01097954578');
 
 SELECT * FROM WEEKENDFARM;
 
@@ -46,16 +46,16 @@ ON DELETE CASCADE;
 ---sns:1, knowhow:2, notice:3
 
 INSERT INTO entireBoard
-VALUES (entireBoardSeq.NEXTVAL, 1, SYSDATE, '테스트글입니다.', '테스트내용입니다.', 'daejin', 1, NULL, NULL, 0);
+VALUES (entireBoardSeq.NEXTVAL, 1, SYSDATE, '�׽�Ʈ���Դϴ�.', '�׽�Ʈ�����Դϴ�.', 'daejin', 1, NULL, NULL, 0);
 
 INSERT INTO entireBoard
-VALUES (entireBoardSeq.NEXTVAL, 1, SYSDATE, '테스트글입니다2.', '테스트내용입니다2.', 'daejin', 1, NULL, NULL, 0);
+VALUES (entireBoardSeq.NEXTVAL, 1, SYSDATE, '�׽�Ʈ���Դϴ�2.', '�׽�Ʈ�����Դϴ�2.', 'daejin', 1, NULL, NULL, 0);
 
 INSERT INTO entireBoard
-VALUES (entireBoardSeq.NEXTVAL, 1, SYSDATE, '테스트글입니다3.', '테스트내용입니다3.', 'daejin', 1, NULL, NULL, 0);
+VALUES (entireBoardSeq.NEXTVAL, 1, SYSDATE, '�׽�Ʈ���Դϴ�3.', '�׽�Ʈ�����Դϴ�3.', 'daejin', 1, NULL, NULL, 0);
 
 INSERT INTO entireBoard
-VALUES (entireBoardSeq.NEXTVAL, 3, SYSDATE, '공지사항제목', '공지사항내용', 'admin', 1, NULL, NULL, 0);
+VALUES (entireBoardSeq.NEXTVAL, 3, SYSDATE, '������������', '�������׳���', 'admin', 1, NULL, NULL, 0);
 
 SELECT * FROM entireBoard;
 SELECT * FROM USERS;
@@ -75,7 +75,7 @@ WHERE boardKind = 3
 ORDER BY boardDate ASC;
 
 
--------------------------상품 --------------------------------------
+-------------------------��ǰ --------------------------------------
 DROP SEQUENCE productSeq;
 DROP TABLE Product;
 
@@ -104,21 +104,21 @@ FOREIGN KEY (userSeq) REFERENCES Users (userSeq)
 ON DELETE CASCADE;
 
 INSERT INTO Product 
-VALUES (productSeq.NEXTVAL, '태린이가 심은 고구마', 8800, '유저판매', SYSDATE, NULL, NULL, NULL, 'N','USER', , 'test', "36.587769", "127.2323808");
+VALUES (productSeq.NEXTVAL, '�¸��̰� ���� ������', 8800, '�����Ǹ�', SYSDATE, NULL, NULL, NULL, 'N','USER', , 'test', "36.587769", "127.2323808");
 
 
 INSERT INTO Product 
-VALUES (productSeq.NEXTVAL, '1인용 텃밭 세트', 12800, '운영자판매', NULL, NULL, NULL, NULL, 'Y', 'ADMIN', 1, '운영자', NULL, NULL);
+VALUES (productSeq.NEXTVAL, '1�ο� �Թ� ��Ʈ', 12800, '����Ǹ�', NULL, NULL, NULL, NULL, 'Y', 'ADMIN', 1, '���', NULL, NULL);
 
 INSERT INTO Product 
-VALUES (productSeq.NEXTVAL, '가정용 호미 세트', 9800, '운영자판매', NULL, NULL, NULL, NULL, 'Y', 'ADMIN', 1, '운영자', NULL, NULL);
+VALUES (productSeq.NEXTVAL, '������ ȣ�� ��Ʈ', 9800, '����Ǹ�', NULL, NULL, NULL, NULL, 'Y', 'ADMIN', 1, '���', NULL, NULL);
 
 INSERT INTO Product 
-VALUES (productSeq.NEXTVAL, '친환경 물뿌리개', 6800, '운영자판매', NULL, NULL, NULL, NULL, 'Y', 'ADMIN', 1, '운영자', NULL, NULL);
+VALUES (productSeq.NEXTVAL, 'ģȯ�� ���Ѹ���', 6800, '����Ǹ�', NULL, NULL, NULL, NULL, 'Y', 'ADMIN', 1, '���', NULL, NULL);
 
 
 INSERT INTO Product 
-VALUES (productSeq.NEXTVAL, '대진이가 심은 상추', 8000, '유저판매', SYSDATE, NULL, NULL, NULL, 'N', 'USER', 1, 'test', NULL, NULL);
+VALUES (productSeq.NEXTVAL, '�����̰� ���� ����', 8000, '�����Ǹ�', SYSDATE, NULL, NULL, NULL, 'N', 'USER', 1, 'test', NULL, NULL);
 
 
 
@@ -135,16 +135,16 @@ SELECT * FROM Product
 WHERE userRole = 'USER'
 ORDER BY productRegDate DESC;
 
-----------------------댓글/대댓글------------------------
+----------------------���/����------------------------
 DROP SEQUENCE commentNoSeq;
 DROP TABLE commentBoard;
 
 CREATE SEQUENCE commentNoSeq;
 
 CREATE TABLE commentBoard(
-	commentNoSeq NUMBER PRIMARY KEY,    --댓글번호
-	groupNo NUMBER,   --댓글이속한번호
-	groupDepth NUMBER,   --댓글의 깊이 모댓글이면 0, 답글이면 1
+	commentNoSeq NUMBER PRIMARY KEY,    --��۹�ȣ
+	groupNo NUMBER,   --����̼��ѹ�ȣ
+	groupDepth NUMBER,   --����� ���� �����̸� 0, ����̸� 1
 	entireBoardSeq NUMBER NOT NULL,
 	userSeq NUMBER NOT NULL,
 	userId VARCHAR2(30) NOT NULL,
@@ -165,18 +165,18 @@ SELECT *
 FROM commentBoard
 WHERE entireBoardSeq = 1;
 
---1번째 댓글 
+--1��° ��� 
 INSERT INTO commentBoard
-VALUES(commentNoSeq.NEXTVAL, 1, 0, 1, 1, 'daejin', '댓글 1 테스트입니다.', SYSDATE);
+VALUES(commentNoSeq.NEXTVAL, 1, 0, 1, 1, 'daejin', '��� 1 �׽�Ʈ�Դϴ�.', SYSDATE);
 
---2번째 댓글
+--2��° ���
 INSERT INTO commentBoard
-VALUES(commentNoSeq.NEXTVAL, 2, 0, 1, 1, 'daejin', '댓글 1 테스트입니다.', SYSDATE);
+VALUES(commentNoSeq.NEXTVAL, 2, 0, 1, 1, 'daejin', '��� 1 �׽�Ʈ�Դϴ�.', SYSDATE);
 
 INSERT INTO commentBoard
-VALUES(commentNoSeq.NEXTVAL, 2, 1, 1, 1, 'daejin', '댓글 1 테스트입니다.', SYSDATE);
----------------------팔로우-----------------------------
---SQL 수정 바람 
+VALUES(commentNoSeq.NEXTVAL, 2, 1, 1, 1, 'daejin', '��� 1 �׽�Ʈ�Դϴ�.', SYSDATE);
+---------------------�ȷο�-----------------------------
+--SQL ���� �ٶ� 
 DROP SEQUENCE followSeq;
 DROP TABLE followTable;
 
@@ -188,7 +188,7 @@ CREATE TABLE followTable(
 	follower_ID VARCHAR2(100)
 );
 
---------------------좋아요------------------------------
+--------------------���ƿ�------------------------------
 DROP SEQUENCE likeSeq;
 DROP TABLE likeTable;
 
@@ -212,7 +212,7 @@ ON DELETE CASCADE;
 
 SELECT * FROM likeTable;
 
---------------------해시태그----------------------------
+--------------------�ؽ��±�----------------------------
 
 DROP SEQUENCE hashTagSeq;
 DROP TABLE hashTag;
