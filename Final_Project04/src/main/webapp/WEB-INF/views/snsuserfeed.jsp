@@ -127,7 +127,7 @@
                             </c:if>
                         </div>
                         <div class="row">
-                            
+
                             <div class="col-md-10 col-md-offset-1">
                                 <!--글내용 작성 부분-->
                                 <span>오늘도 힘차게 당근키우기,  

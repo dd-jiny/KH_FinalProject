@@ -36,7 +36,7 @@ public class FollowBizImpl implements FollowBiz {
 	
 	@Override
 	public int checkFollow(String following_ID, String follower_ID) throws Exception {
-		return 0;
+		return followDao.checkFollow(following_ID , follower_ID);
 	}
 	
 	//팔로우 취소
