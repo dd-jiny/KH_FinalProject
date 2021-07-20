@@ -29,11 +29,13 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.phoenix.carrot.biz.sns.CommentBoardBiz;
 import com.phoenix.carrot.biz.sns.FileValidator;
+import com.phoenix.carrot.biz.sns.FollowBiz;
 import com.phoenix.carrot.biz.sns.LikeTableBiz;
 import com.phoenix.carrot.biz.sns.SnsBoardBiz;
 import com.phoenix.carrot.dao.sns.LikeTableDao;
 import com.phoenix.carrot.dto.sns.CommentBoardDto;
 import com.phoenix.carrot.dto.sns.EntireBoardDto;
+import com.phoenix.carrot.dto.sns.FollowDto;
 import com.phoenix.carrot.dto.sns.LikeTableDto;
 import com.phoenix.carrot.user.biz.UserBiz;
 import com.phoenix.carrot.user.dto.UserDto;
@@ -57,6 +59,8 @@ public class SnsController {
 	private UserBiz userbiz;
 	@Autowired
 	private CommentBoardBiz commentbiz;
+	@Autowired
+	private FollowBiz followbiz;
 	
 	@Resource(name="uploadPath")
 	private String uploadPath;
@@ -75,15 +79,41 @@ public class SnsController {
 		return "main";
 	}
 	
+	
 	@RequestMapping("/snsBoardUserFeed.do")
 	public String snsUserFeed(Model model, @RequestParam String userId) {
 		logger.info("[Controller] : snsBoardUserFeed.do");
+		
 		
 		model.addAttribute("snsUserSelectOne", biz.snsUserSelectOne(userId));
 		model.addAttribute("snsUserFeedList", biz.snsUserFeedList(userId));
 		return "snsuserfeed";
 	}
 	
+	/*
+	@RequestMapping("/snsBoardUserFeed.do")
+	public String snsUserFeed(Model model, FollowDto followdto, @RequestParam String userId, HttpSession session) throws Exception {
+		logger.info("[Controller] : snsBoardUserFeed.do");
+		String following_ID = (String) session.getAttribute("userid");
+		System.out.println("following_ID : " + following_ID);
+		
+		String follower = followdto.getFollower_ID();
+		int followInfo = followbiz.checkFollow(following_ID, follower);
+		System.out.println("followInfo : " + followInfo);
+		
+		if(followInfo==0) {
+			model.addAttribute("followInfo", "enable");
+		} else {
+			model.addAttribute("followInfo", "disable");
+		}
+		
+		model.addAttribute("selectFollow", followbiz.selectFollow(follower));
+		model.addAttribute("followCount", followbiz.followCount(follower));
+		model.addAttribute("snsUserSelectOne", biz.snsUserSelectOne(userId));
+		model.addAttribute("snsUserFeedList", biz.snsUserFeedList(userId));
+		return "snsuserfeed";
+	}
+	*/
 	@RequestMapping("/snsBoardInsertForm.do")
 	public String snsBoardInsertForm() {
 		

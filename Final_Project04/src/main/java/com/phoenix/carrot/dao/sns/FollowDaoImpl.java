@@ -44,7 +44,7 @@ public class FollowDaoImpl implements FollowDao {
 		
 		map.put("following_ID", following_ID);
 		map.put("follower_ID", follower_ID);
-		System.out.println("map :" + map);
+		
 		sqlSession.delete(NAMESPACE + "followDelete", map);
 		
 	}

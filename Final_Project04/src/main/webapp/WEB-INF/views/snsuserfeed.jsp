@@ -127,7 +127,24 @@
                             </c:if>
                         </div>
                         <div class="row">
-
+							팔로워 : 
+									<!--팔로워 클릭시 팔로우로 변경하기-->
+									<!-- 로그인한 아이디가 팔로우한 테이블에 있으면 팔로워 취소버튼을 보이고
+									없으면 팔로우 버튼을 보이게 할 것 --%>
+		
+									<!-- 팔로우 수 -->
+									[<span id="followCount">123</span>]
+									
+										<input type="button" name="insertFollow" value="팔로워" id="insertFollow" class="btn">
+								
+									
+									<!-- 팔로우한 사용자 -->
+									<br>팔로우한 사용자<br>
+									<div id="followPeople">
+										
+											<div id="followingID">팔로잉아이디</div>
+										
+									</div>
                             <div class="col-md-10 col-md-offset-1">
                                 <!--글내용 작성 부분-->
                                 <span>오늘도 힘차게 당근키우기,  

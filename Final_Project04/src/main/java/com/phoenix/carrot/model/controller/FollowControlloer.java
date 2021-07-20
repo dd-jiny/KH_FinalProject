@@ -24,8 +24,8 @@ public class FollowControlloer {
 	public int insertFollow(Model model, String follower_ID, String following_ID, FollowDto followdto, HttpSession session) throws Exception {
 		
 		followbiz.insertFollow(followdto);
-		String follow = followdto.getFollowerId();
-		int followInfo = followbiz.checkFollow(followdto.getFollowingId(), follow);
+		String follow = followdto.getFollower_ID();
+		int followInfo = followbiz.checkFollow(followdto.getFollowing_ID(), follow);
 		
 		//followingInfo=1이라면 이미 팔로워  followingInfo=0이라면 아직 팔로워하지 않았음
 		if(followInfo == 0) {
@@ -47,9 +47,9 @@ public class FollowControlloer {
 		
 		followbiz.deleteFollow(following_ID, follower_ID);
 		
-		String follow = followdto.getFollowerId();
+		String follow = followdto.getFollower_ID();
 		
-		int followInfo = followbiz.checkFollow(followdto.getFollowingId(), follow);
+		int followInfo = followbiz.checkFollow(followdto.getFollowing_ID(), follow);
 		
 		if(followInfo == 0) {
 			model.addAttribute("followingInfo", "enable");

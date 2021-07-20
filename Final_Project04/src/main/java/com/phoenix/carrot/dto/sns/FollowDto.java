@@ -3,18 +3,18 @@ package com.phoenix.carrot.dto.sns;
 public class FollowDto {
 	
 	private int followSeq;
-	private String followingId;
-	private String followerId;
+	private String following_ID;
+	private String follower_ID;
 	
 	public FollowDto() {
 
 	}
 
-	public FollowDto(int followSeq, String followingId, String followerId) {
-
+	public FollowDto(int followSeq, String following_ID, String follower_ID) {
+		super();
 		this.followSeq = followSeq;
-		this.followingId = followingId;
-		this.followerId = followerId;
+		this.following_ID = following_ID;
+		this.follower_ID = follower_ID;
 	}
 
 	public int getFollowSeq() {
@@ -25,26 +25,22 @@ public class FollowDto {
 		this.followSeq = followSeq;
 	}
 
-	public String getFollowingId() {
-		return followingId;
+	public String getFollowing_ID() {
+		return following_ID;
 	}
 
-	public void setFollowingId(String followingId) {
-		this.followingId = followingId;
+	public void setFollowing_ID(String following_ID) {
+		this.following_ID = following_ID;
 	}
 
-	public String getFollowerId() {
-		return followerId;
+	public String getFollower_ID() {
+		return follower_ID;
 	}
 
-	public void setFollowerId(String followerId) {
-		this.followerId = followerId;
+	public void setFollower_ID(String follower_ID) {
+		this.follower_ID = follower_ID;
 	}
-	
-	
-	
-	
-	
+
 	
 
 }
